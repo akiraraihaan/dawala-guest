@@ -17,8 +17,10 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
 
   let images: string[] = []
   if (Array.isArray(makanan.foto)) {
-    images = makanan.foto
-  } else if (typeof makanan.foto === 'string') {
+    images = makanan.foto.filter(
+      (url) => typeof url === 'string' && (url.startsWith('http') || url.startsWith('/'))
+    )
+  } else if (typeof makanan.foto === 'string' && (makanan.foto.startsWith('http') || makanan.foto.startsWith('/'))) {
     images = [makanan.foto]
   }
 
@@ -51,13 +53,17 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
           {/* Image Slider */}
           <div className="relative mb-6">
             <div className="relative h-80 rounded-lg overflow-hidden">
-              {images.length > 0 && (
+              {images.length > 0 ? (
                 <Image
                   src={images[currentImageIndex]}
                   alt={makanan.nama_makanan}
                   fill
                   className="object-cover"
                 />
+              ) : (
+                <div className="flex items-center justify-center h-full text-gray-400">
+                  Gambar tidak tersedia
+                </div>
               )}
               {/* Navigation Arrows */}
               {images.length > 1 && (

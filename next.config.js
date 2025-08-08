@@ -3,11 +3,8 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-  // Optional: i18n config for static export fallback
-  i18n: {
-    locales: ['id', 'en'],
-    defaultLocale: 'id',
-    localeDetection: false,
+  images: {
+    domains: ['images.unsplash.com'],
   },
 };
 

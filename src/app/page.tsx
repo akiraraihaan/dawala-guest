@@ -8,7 +8,7 @@ import MakananModal from '@/components/MakananModal'
 import FilterPaket from '@/components/FilterPaket'
 import { LoadingCards } from '@/components/LoadingSpinner'
 import { JenisPaket, Makanan } from '@/types'
-import { useTranslations } from 'next-intl';
+
 
 export default function Home() {
   const [makanan, setMakanan] = useState<Makanan[]>([])
@@ -18,7 +18,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null)
   const [selectedMakanan, setSelectedMakanan] = useState<Makanan | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const t = useTranslations();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,16 +87,16 @@ export default function Home() {
       <section className="bg-gradient-to-r from-green-600 to-green-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            {t('hero_title')}
+            Selamat Datang di Desa Wisata Dawala
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            {t('hero_desc')}
+            Jelajahi keindahan alam, nikmati kuliner autentik, dan rasakan pengalaman wisata yang tak terlupakan
           </p>
           <a 
             href="mailto:dawaladev@gmail.com"
             className="inline-block bg-white text-green-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors"
           >
-            {t('plan_visit')}
+            Rencanakan Kunjungan
           </a>
         </div>
       </section>
@@ -106,10 +106,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-              {t('menu_title')}
+              Paket Wisata & Kuliner
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              {t('menu_desc')}
+              Temukan berbagai pilihan paket wisata dan kuliner yang telah kami siapkan khusus untuk pengalaman yang berkesan
             </p>
           </div>
 

@@ -22,7 +22,7 @@ export default function MakananCard({ makanan, onClick }: MakananCardProps) {
     >
       <div className="relative h-48 w-full">
         <Image
-          src={makanan.foto}
+          src={makanan.foto && (makanan.foto.startsWith('http') || makanan.foto.startsWith('/')) ? makanan.foto : '/placeholder.png'}
           alt={makanan.nama_makanan}
           fill
           className="object-cover"
