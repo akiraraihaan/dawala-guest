@@ -15,14 +15,64 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   if (!isOpen || !makanan) return null
 
-  let images: string[] = []
-  if (Array.isArray(makanan.foto)) {
-    images = makanan.foto.filter(
-      (url) => typeof url === 'string' && (url.startsWith('http') || url.startsWith('/'))
-    )
-  } else if (typeof makanan.foto === 'string' && (makanan.foto.startsWith('http') || makanan.foto.startsWith('/'))) {
-    images = [makanan.foto]
-  }
+  // Supabase Storage public base URL for 'gastronomi' bucket
+  const SUPABASE_BASE_URL =
+    'https://iroaauayoqlfsetgtlec.supabase.co/storage/v1/object/public/gastronomi';
+
+  // Helper to get correct image src
+  const getImageUrl = (fotoStr: string) => {
+    if (!fotoStr) return '/placeholder-food.jpg';
+    if (fotoStr.startsWith('data:image')) return fotoStr;
+    if (fotoStr.startsWith('http')) return fotoStr;
+    // If fotoStr is just a filename, build Supabase public URL
+    return `${SUPABASE_BASE_URL}/${fotoStr}`;
+  };
+
+  // Helper: parse foto field (same as in MakananCard)
+  const parsePhotoArray = (foto: any) => {
+    if (!foto) return [];
+    
+    // If it's a string that looks like JSON, try to parse it
+    if (typeof foto === 'string') {
+      // Check if it's a JSON string
+      if (foto.startsWith('[') && foto.endsWith(']')) {
+        try {
+          const parsed = JSON.parse(foto);
+          if (Array.isArray(parsed)) {
+            return parsed.filter((f: any) => 
+              typeof f === 'string' && (f.startsWith('http') || f.startsWith('data:image'))
+            );
+          }
+          return [];
+        } catch (e) {
+          console.log('Error parsing foto JSON in modal:', e);
+          return [];
+        }
+      }
+      // If it's a direct URL string
+      if (foto.startsWith('http') || foto.startsWith('data:image')) {
+        return [foto];
+      }
+      return [];
+    }
+    
+    if (Array.isArray(foto)) {
+      return foto.filter((f: any) => 
+        typeof f === 'string' && (f.startsWith('http') || f.startsWith('data:image'))
+      );
+    }
+    
+    return [];
+  };
+
+  const photoUrls = parsePhotoArray(makanan.foto);
+  const images: string[] = photoUrls.length > 0 
+    ? photoUrls.map(getImageUrl) 
+    : ['/placeholder-food.jpg'];
+
+  console.log('Modal foto raw:', makanan.foto);
+  console.log('Modal parsed photos:', photoUrls);
+  console.log('Modal final images:', images);
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % images.length)
@@ -39,7 +89,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
       <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-2xl font-bold text-gray-800">{makanan.nama_makanan}</h2>
+          <h2 className="text-2xl font-bold text-gray-800">{makanan.namaMakanan}</h2>
           <button 
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700 text-2xl font-semibold"
@@ -53,18 +103,16 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
           {/* Image Slider */}
           <div className="relative mb-6">
             <div className="relative h-80 rounded-lg overflow-hidden">
-              {images.length > 0 ? (
-                <Image
-                  src={images[currentImageIndex]}
-                  alt={makanan.nama_makanan}
-                  fill
-                  className="object-cover"
-                />
-              ) : (
-                <div className="flex items-center justify-center h-full text-gray-400">
-                  Gambar tidak tersedia
-                </div>
-              )}
+              <Image
+                src={images[currentImageIndex] || '/placeholder-food.jpg'}
+                alt={makanan.namaMakanan || 'Gambar makanan'}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                onError={(e: any) => {
+                  e.target.src = '/placeholder-food.jpg';
+                }}
+              />
               {/* Navigation Arrows */}
               {images.length > 1 && (
                 <>
@@ -119,7 +167,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
             <div className="border-t pt-4">
               <h4 className="font-semibold text-gray-800 mb-2">Informasi & Reservasi</h4>
               <a 
-                href={`mailto:dawaladev@gmail.com?subject=Reservasi Paket Wisata&body=Saya tertarik dengan paket: ${makanan.nama_makanan}`}
+                href={`mailto:dawaladev@gmail.com?subject=Reservasi Paket Wisata&body=Saya tertarik dengan paket: ${makanan.namaMakanan}`}
                 className="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

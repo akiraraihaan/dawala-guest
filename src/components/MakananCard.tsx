@@ -6,7 +6,81 @@ interface MakananCardProps {
   onClick?: () => void
 }
 
+
 export default function MakananCard({ makanan, onClick }: MakananCardProps) {
+
+
+  // Helper: get first valid image string from foto array
+  const getFirstValidImage = (foto: any) => {
+    console.log('Raw foto value:', foto, 'Type:', typeof foto);
+    
+    if (!foto) return '';
+    
+    // If it's a string that looks like JSON, try to parse it
+    if (typeof foto === 'string') {
+      // Check if it's a JSON string
+      if (foto.startsWith('[') && foto.endsWith(']')) {
+        try {
+          const parsed = JSON.parse(foto);
+          console.log('Parsed foto array:', parsed);
+          if (Array.isArray(parsed)) {
+            // Find first valid string (http/https or base64)
+            for (const f of parsed) {
+              if (typeof f === 'string' && (f.startsWith('http') || f.startsWith('data:image'))) {
+                console.log('Found valid image URL:', f);
+                return f;
+              }
+            }
+          }
+          return '';
+        } catch (e) {
+          console.log('Error parsing foto JSON:', e);
+          // Maybe it's a direct URL string without JSON wrapping
+          if (foto.startsWith('http') || foto.startsWith('data:image')) {
+            console.log('Using direct URL string:', foto);
+            return foto;
+          }
+          return '';
+        }
+      }
+      // If it's a direct URL string
+      if (foto.startsWith('http') || foto.startsWith('data:image')) {
+        console.log('Using direct URL string:', foto);
+        return foto;
+      }
+      return '';
+    }
+    
+    if (Array.isArray(foto)) {
+      console.log('Processing array:', foto);
+      // Find first valid string (http/https or base64)
+      for (const f of foto) {
+        if (typeof f === 'string' && (f.startsWith('http') || f.startsWith('data:image'))) {
+          console.log('Found valid image URL from array:', f);
+          return f;
+        }
+      }
+      return '';
+    }
+    
+    console.log('No valid image found, using placeholder');
+    return '';
+  };
+
+  // Supabase Storage public base URL for 'gastronomi' bucket
+  const SUPABASE_BASE_URL =
+    'https://iroaauayoqlfsetgtlec.supabase.co/storage/v1/object/public/gastronomi';
+
+  // Helper to get correct image src
+  const getImageUrl = (fotoStr: string) => {
+    if (!fotoStr) return '/placeholder-food.jpg';
+    if (fotoStr.startsWith('data:image')) return fotoStr;
+    if (fotoStr.startsWith('http')) return fotoStr;
+    // Jika fotoStr sudah mengandung subfolder (misal: makanan/...), langsung gabung
+    return `${SUPABASE_BASE_URL}/${fotoStr}`;
+  };
+
+
   const formatRupiah = (amount: number) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
@@ -15,23 +89,34 @@ export default function MakananCard({ makanan, onClick }: MakananCardProps) {
     }).format(amount)
   }
 
+  // Debug: log isi makanan.foto mentah  
+  console.log('=== MakananCard DEBUG ===');
+  console.log('MakananCard foto:', makanan.foto);
   return (
     <div 
       className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:scale-105"
       onClick={onClick}
     >
       <div className="relative h-48 w-full">
-        <Image
-          src={makanan.foto && (makanan.foto.startsWith('http') || makanan.foto.startsWith('/')) ? makanan.foto : '/placeholder.png'}
-          alt={makanan.nama_makanan}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+        {(() => {
+          // Always use first valid image string
+          let imageUrl = getFirstValidImage(makanan.foto);
+          if (!imageUrl) imageUrl = '/placeholder-food.jpg';
+          console.log('Image URL:', imageUrl);
+          return (
+            <Image
+              src={imageUrl}
+              alt={makanan.namaMakanan || 'Gambar makanan'}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          );
+        })()}
       </div>
       <div className="p-4">
         <h3 className="font-semibold text-lg text-gray-800 mb-2">
-          {makanan.nama_makanan}
+          {makanan.namaMakanan}
         </h3>
         <p className="text-gray-600 text-sm mb-3 line-clamp-2">
           {makanan.deskripsi}
@@ -42,7 +127,7 @@ export default function MakananCard({ makanan, onClick }: MakananCardProps) {
           </span>
           {makanan.jenisPaket && (
             <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
-              {makanan.jenisPaket.nama_paket}
+              {makanan.jenisPaket.namaPaket}
             </span>
           )}
         </div>

@@ -1,18 +1,16 @@
+
 export interface JenisPaket {
-  id: number
-  nama_paket: string
-  createdAt: Date
-  updatedAt: Date
+  id: number;
+  namaPaket: string;
 }
 
+
 export interface Makanan {
-  id: number
-  nama_makanan: string
-  deskripsi: string
-  foto: string
-  harga: number
-  jenis_paket_id: number
-  createdAt: Date
-  updatedAt: Date
-  jenisPaket?: JenisPaket
+  id: number;
+  namaMakanan: string;
+  deskripsi: string;
+  foto: string[];
+  harga: number;
+  jenisPaketId: number;
+  jenisPaket?: JenisPaket;
 }
