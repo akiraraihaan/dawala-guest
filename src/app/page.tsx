@@ -90,7 +90,7 @@ export default function Home() {
         <div className="absolute inset-0">
           <Image
             src="/images/DSC06062.JPG"
-            alt="Pemandangan Desa Wisata Dawala"
+            alt="Pemandangan Desa Wisata Alamendah"
             fill
             className="object-cover brightness-50"
             priority
@@ -100,10 +100,10 @@ export default function Home() {
         {/* Hero Content */}
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
-            Selamat Datang di Desa Wisata Dawala
+            Selamat Datang di Desa Wisata Alamendah
           </h1>
           <p className="text-xl md:text-2xl mb-8 drop-shadow-lg">
-            Jelajahi keindahan alam, nikmati kuliner autentik, dan rasakan pengalaman wisata yang tak terlupakan
+            Jelajahi keindahan alam Kabupaten Bandung, nikmati kuliner autentik, dan rasakan pengalaman wisata yang tak terlupakan
           </p>
           <a 
             href="mailto:dawaladev@gmail.com"
@@ -130,7 +130,7 @@ export default function Home() {
                 Paket Wisata & Kuliner
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Temukan berbagai pilihan paket wisata dan kuliner yang telah kami siapkan khusus untuk pengalaman yang berkesan di Desa Wisata Dawala
+                Temukan berbagai pilihan paket wisata dan kuliner yang telah kami siapkan khusus untuk pengalaman yang berkesan di Desa Wisata Alamendah, Kabupaten Bandung
               </p>
             </div>
 
@@ -180,21 +180,21 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                Tentang Desa Wisata Dawala
+                Tentang Desa Wisata Alamendah
               </h2>
               <p className="text-lg text-gray-600 mb-6">
-                Desa Wisata Dawala menawarkan pengalaman autentik kehidupan pedesaan dengan keindahan alam yang menakjubkan. 
+                Desa Wisata Alamendah di Kabupaten Bandung menawarkan pengalaman autentik kehidupan pedesaan dengan keindahan alam yang menakjubkan. 
                 Nikmati aktivitas wisata yang beragam, mulai dari wisata alam, budaya, hingga kuliner tradisional yang lezat.
               </p>
               <p className="text-lg text-gray-600">
-                Dengan pemandangan pegunungan yang indah dan udara yang sejuk, Dawala adalah destinasi sempurna untuk 
+                Dengan pemandangan pegunungan yang indah dan udara yang sejuk, Alamendah adalah destinasi sempurna untuk 
                 melepas penat dari kehidupan kota yang sibuk.
               </p>
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-lg">
               <Image
                 src="/images/Desa Wisata Alamendah (118).JPG"
-                alt="Suasana Desa Wisata Dawala"
+                alt="Suasana Desa Wisata Alamendah"
                 fill
                 className="object-cover"
               />
@@ -211,7 +211,7 @@ export default function Home() {
               Aktivitas & Pengalaman
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Berbagai kegiatan menarik menanti Anda di Desa Wisata Dawala
+              Berbagai kegiatan menarik menanti Anda di Desa Wisata Alamendah, Kabupaten Bandung
             </p>
           </div>
 
@@ -319,7 +319,7 @@ export default function Home() {
             Siap untuk Petualangan yang Tak Terlupakan?
           </h2>
           <p className="text-xl text-green-100 mb-8">
-            Hubungi kami sekarang dan rencanakan kunjungan Anda ke Desa Wisata Dawala
+            Hubungi kami sekarang dan rencanakan kunjungan Anda ke Desa Wisata Alamendah, Kabupaten Bandung
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 

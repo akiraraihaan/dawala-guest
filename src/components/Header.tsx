@@ -28,7 +28,7 @@ export default function Header() {
             <Link href="/" className="flex items-center">
               <img
                 src="/Dawala.png"
-                alt="Logo Dawala"
+                alt="Logo Alamendah"
                 className={`w-auto transition-all duration-300 ${
                   isScrolled ? 'h-10' : 'h-12'
                 }`}

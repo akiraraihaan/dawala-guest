@@ -5,12 +5,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-lg font-bold mb-4">DAWALA VILLAGE</h3>
+            <h3 className="text-lg font-bold mb-4">DESA WISATA ALAMENDAH</h3>
             <p className="text-gray-300 mb-4">
-              Desa wisata yang menawarkan pengalaman kuliner dan wisata terbaik dengan berbagai paket wisata dan kuliner yang menarik.
+              Desa wisata yang menawarkan pengalaman kuliner dan wisata terbaik di Kabupaten Bandung dengan berbagai paket wisata dan kuliner yang menarik.
             </p>
             <p className="text-gray-300 text-sm">
-              Nikmati keindahan alam dan cita rasa kuliner lokal yang autentik.
+              Nikmati keindahan alam dan cita rasa kuliner lokal yang autentik di Jawa Barat.
             </p>
           </div>
 
@@ -43,7 +43,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">
           <p className="text-gray-300 text-sm">
-            © 2025 DAWALA VILLAGE. All rights reserved.
+            © 2025 DESA WISATA ALAMENDAH. All rights reserved.
           </p>
         </div>
       </div>

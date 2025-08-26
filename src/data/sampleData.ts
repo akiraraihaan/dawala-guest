@@ -30,8 +30,8 @@ export const sampleJenisPaket: JenisPaket[] = [
 export const sampleMakanan: Makanan[] = [
   {
     id: 1,
-    nama_makanan: "Nasi Gudeg Dawala",
-    deskripsi: "Gudeg khas desa Dawala dengan cita rasa autentik, disajikan dengan ayam kampung dan sambal krecek pedas.",
+    nama_makanan: "Nasi Gudeg Alamendah",
+    deskripsi: "Gudeg khas Desa Wisata Alamendah dengan cita rasa autentik, disajikan dengan ayam kampung dan sambal krecek pedas.",
     foto: "https://images.unsplash.com/photo-1596040033229-a8a1b99afd77?w=500&h=300&fit=crop",
     harga: 25000,
     jenis_paket_id: 2,
@@ -52,7 +52,7 @@ export const sampleMakanan: Makanan[] = [
   },
   {
     id: 3,
-    nama_makanan: "Paket Hiking Bukit Dawala",
+    nama_makanan: "Paket Hiking Bukit Alamendah",
     deskripsi: "Nikmati pemandangan sunrise dari puncak bukit dengan guide lokal berpengalaman. Termasuk sarapan tradisional.",
     foto: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=500&h=300&fit=crop",
     harga: 75000,
@@ -74,7 +74,7 @@ export const sampleMakanan: Makanan[] = [
   },
   {
     id: 5,
-    nama_makanan: "Gado-gado Dawala",
+    nama_makanan: "Gado-gado Alamendah",
     deskripsi: "Gado-gado dengan sayuran segar dari kebun desa dan bumbu kacang rahasia keluarga turun temurun.",
     foto: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500&h=300&fit=crop",
     harga: 20000,

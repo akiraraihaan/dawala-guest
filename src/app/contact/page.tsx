@@ -49,7 +49,7 @@ export default function Contact() {
                 <div className="flex items-start">
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-gray-800">Lokasi</h3>
-                    <p className="text-gray-600">Desa Dawala, Indonesia</p>
+                    <p className="text-gray-600">Desa Wisata Alamendah, Kabupaten Bandung, Jawa Barat, Indonesia</p>
                     <p className="text-gray-500 text-sm">Melayani wisatawan dari berbagai daerah</p>
                   </div>
                 </div>

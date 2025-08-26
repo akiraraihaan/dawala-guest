@@ -75,7 +75,7 @@ export default function Menu() {
             Paket Wisata & Kuliner Lengkap
           </h1>
           <p className="text-xl max-w-2xl mx-auto">
-            Jelajahi semua pilihan paket wisata dan kuliner yang tersedia di Desa Dawala
+            Jelajahi semua pilihan paket wisata dan kuliner yang tersedia di Desa Wisata Alamendah, Kabupaten Bandung
           </p>
         </div>
       </section>
