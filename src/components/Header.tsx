@@ -24,12 +24,6 @@ export default function Header() {
               Beranda
             </Link>
             <Link 
-              href="/menu" 
-              className="text-gray-600 hover:text-green-600 transition-colors"
-            >
-              Kuliner
-            </Link>
-            <Link 
               href="/contact" 
               className="text-gray-600 hover:text-green-600 transition-colors"
             >

@@ -18,9 +18,9 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4">Informasi Kontak</h3>
             <div className="space-y-2 text-gray-300">
-              <p>📧 Email: dawaladev@gmail.com</p>
-              <p>📱 Phone: +62 xxx-xxxx-xxxx</p>
-              <p>📍 Lokasi: Desa Dawala, Indonesia</p>
+              <p>Email: dawaladev@gmail.com</p>
+              <p>Phone: +62 xxx-xxxx-xxxx</p>
+              <p>Lokasi: Desa Wisata Alamendah, Kab. Bandung, Indonesia</p>
             </div>
           </div>
 

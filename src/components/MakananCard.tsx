@@ -106,7 +106,7 @@ export default function MakananCard({ makanan, onClick }: MakananCardProps) {
           return (
             <Image
               src={imageUrl}
-              alt={makanan.namaMakanan || 'Gambar makanan'}
+              alt={makanan.nama_makanan || 'Gambar makanan'}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -116,7 +116,7 @@ export default function MakananCard({ makanan, onClick }: MakananCardProps) {
       </div>
       <div className="p-4">
         <h3 className="font-semibold text-lg text-gray-800 mb-2">
-          {makanan.namaMakanan}
+          {makanan.nama_makanan}
         </h3>
         <p className="text-gray-600 text-sm mb-3 line-clamp-2">
           {makanan.deskripsi}
@@ -127,7 +127,7 @@ export default function MakananCard({ makanan, onClick }: MakananCardProps) {
           </span>
           {makanan.jenisPaket && (
             <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
-              {makanan.jenisPaket.namaPaket}
+              {makanan.jenisPaket.nama_paket}
             </span>
           )}
         </div>

@@ -89,10 +89,10 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
       <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-2xl font-bold text-gray-800">{makanan.namaMakanan}</h2>
+          <h2 className="text-2xl font-bold text-gray-800">{makanan.nama_makanan}</h2>
           <button 
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 text-2xl font-semibold"
+            className="text-gray-500 hover:text-gray-700 text-2xl font-semibold cursor-pointer"
           >
             ×
           </button>
@@ -105,7 +105,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
             <div className="relative h-80 rounded-lg overflow-hidden">
               <Image
                 src={images[currentImageIndex] || '/placeholder-food.jpg'}
-                alt={makanan.namaMakanan || 'Gambar makanan'}
+                alt={makanan.nama_makanan || 'Gambar makanan'}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -118,7 +118,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
                 <>
                   <button
                     onClick={prevImage}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-lg transition-all"
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-lg transition-all cursor-pointer"
                   >
                     <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -126,7 +126,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
                   </button>
                   <button
                     onClick={nextImage}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-lg transition-all"
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-lg transition-all cursor-pointer"
                   >
                     <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -167,7 +167,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
             <div className="border-t pt-4">
               <h4 className="font-semibold text-gray-800 mb-2">Informasi & Reservasi</h4>
               <a 
-                href={`mailto:dawaladev@gmail.com?subject=Reservasi Paket Wisata&body=Saya tertarik dengan paket: ${makanan.namaMakanan}`}
+                href={`mailto:dawaladev@gmail.com?subject=Reservasi Paket Wisata&body=Saya tertarik dengan paket: ${makanan.nama_makanan}`}
                 className="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
