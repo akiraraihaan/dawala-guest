@@ -31,9 +31,6 @@ export default function Footer() {
               <a href="/" className="block text-gray-300 hover:text-white transition-colors">
                 Beranda
               </a>
-              <a href="/menu" className="block text-gray-300 hover:text-white transition-colors">
-                Kuliner Kami
-              </a>
               <a href="/contact" className="block text-gray-300 hover:text-white transition-colors">
                 Hubungi Kami
               </a>
