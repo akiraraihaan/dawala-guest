@@ -1,14 +1,16 @@
 import Image from 'next/image'
 import { Makanan } from '@/types'
 import { getSupabaseImageUrl } from '@/lib/config'
+import { getFoodDescription, getPackageName } from '@/lib/database-i18n'
 
 interface MakananCardProps {
   makanan: Makanan
   onClick?: () => void
+  locale?: 'id' | 'en'
 }
 
 
-export default function MakananCard({ makanan, onClick }: MakananCardProps) {
+export default function MakananCard({ makanan, onClick, locale = 'id' }: MakananCardProps) {
 
 
   // Helper: get first valid image string from foto array
@@ -99,7 +101,7 @@ export default function MakananCard({ makanan, onClick }: MakananCardProps) {
           return (
             <Image
               src={imageUrl}
-              alt={makanan.nama_makanan || 'Gambar makanan'}
+              alt={makanan.namaMakanan || 'Gambar makanan'}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -109,10 +111,10 @@ export default function MakananCard({ makanan, onClick }: MakananCardProps) {
       </div>
       <div className="p-4">
         <h3 className="font-semibold text-lg text-gray-800 mb-2">
-          {makanan.nama_makanan}
+          {makanan.namaMakanan}
         </h3>
         <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-          {makanan.deskripsi}
+          {getFoodDescription(makanan, locale)}
         </p>
         <div className="flex justify-between items-center">
           <span className="text-lg font-bold text-green-600">
@@ -120,7 +122,7 @@ export default function MakananCard({ makanan, onClick }: MakananCardProps) {
           </span>
           {makanan.jenisPaket && (
             <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
-              {makanan.jenisPaket.nama_paket}
+              {getPackageName(makanan.jenisPaket || {}, locale)}
             </span>
           )}
         </div>

@@ -1,12 +1,14 @@
 import { JenisPaket } from '@/types'
+import { getPackageName } from '@/lib/database-i18n'
 
 interface FilterPaketProps {
   jenisPaket: JenisPaket[]
   selectedPaket: number | null
   onSelectPaket: (paketId: number | null) => void
+  locale?: 'id' | 'en'
 }
 
-export default function FilterPaket({ jenisPaket, selectedPaket, onSelectPaket }: FilterPaketProps) {
+export default function FilterPaket({ jenisPaket, selectedPaket, onSelectPaket, locale = 'id' }: FilterPaketProps) {
   return (
     <div className="mb-8">
       <h3 className="text-lg font-semibold text-gray-800 mb-4">Filter berdasarkan Kategori</h3>
@@ -31,7 +33,7 @@ export default function FilterPaket({ jenisPaket, selectedPaket, onSelectPaket }
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
             }`}
           >
-            {paket.nama_paket}
+            {getPackageName(paket, locale)}
           </button>
         ))}
       </div>

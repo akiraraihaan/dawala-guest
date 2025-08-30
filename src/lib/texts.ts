@@ -1,4 +1,5 @@
 import { config } from './config'
+import { translateText } from './translate'
 
 // Type definition for the texts structure
 export interface Texts {
@@ -142,10 +143,68 @@ export interface Texts {
   }
 }
 
+// Cache untuk terjemahan
+const translationCache = new Map<string, string>()
+
+// Function to generate English translations automatically
+const generateEnglishTranslations = async (idTexts: any): Promise<any> => {
+  const translateField = async (text: string): Promise<string> => {
+    if (typeof text !== 'string' || text.length < 3) return text
+    
+    // Check cache first
+    if (translationCache.has(text)) {
+      return translationCache.get(text)!
+    }
+    
+    try {
+      // Add timeout to prevent hanging
+      const timeoutPromise = new Promise<string>((_, reject) => 
+        setTimeout(() => reject(new Error('Translation timeout')), 3000)
+      )
+      
+      const translatePromise = translateText(text, 'en').then(result => result.translatedText)
+      
+      const translatedText = await Promise.race([translatePromise, timeoutPromise])
+      
+      // Cache the result
+      translationCache.set(text, translatedText)
+      return translatedText
+    } catch {
+      // Fallback to original text
+      translationCache.set(text, text)
+      return text
+    }
+  }
+
+  const translateObject = async (obj: any): Promise<any> => {
+    if (typeof obj === 'string') {
+      return await translateField(obj)
+    }
+    if (Array.isArray(obj)) {
+      return Promise.all(obj.map(item => translateObject(item)))
+    }
+    if (obj && typeof obj === 'object') {
+      const result: any = {}
+      for (const [key, value] of Object.entries(obj)) {
+        // Skip translation for images object to prevent path corruption
+        if (key === 'images') {
+          result[key] = value
+        } else {
+          result[key] = await translateObject(value)
+        }
+      }
+      return result
+    }
+    return obj
+  }
+
+  return await translateObject(idTexts)
+}
+
 // Function to get texts with type safety
-export const getTexts = (): Texts => {
+export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
   // Import JSON data directly to avoid Turbopack HMR issues
-  const textsData = {
+  const textsDataId = {
     "header": {
       "logoAlt": "Logo Alamendah",
       "navigation": {
@@ -289,8 +348,158 @@ export const getTexts = (): Texts => {
       "accommodation": "/images/WhatsApp Image 2022-12-01 at 15.37.06.jpeg"
     }
   }
+
+
   
-  return textsData as Texts
+  if (locale === 'id') {
+    return textsDataId as Texts
+  } else {
+    // Try to generate English translations automatically with fallback
+    try {
+      const translatedTexts = await generateEnglishTranslations(textsDataId)
+      return translatedTexts as Texts
+    } catch (error) {
+      console.warn('Translation failed, using fallback:', error)
+      // Fallback to simple English translations
+      return {
+        ...textsDataId,
+        header: {
+          ...textsDataId.header,
+          logoAlt: "Alamendah Logo",
+          navigation: {
+            home: "Home",
+            menu: "Menu", 
+            contact: "Contact"
+          },
+          contactButton: "Contact Us"
+        },
+        footer: {
+          ...textsDataId.footer,
+          companyName: "ALAMENDAH TOURISM VILLAGE",
+          description: "A tourism village offering the best culinary and tourism experiences in Bandung Regency with various attractive tourism and culinary packages.",
+          subDescription: "Enjoy the beauty of nature and authentic local culinary flavors in West Java.",
+          contactInfo: {
+            ...textsDataId.footer.contactInfo,
+            title: "Contact Information",
+            location: "Alamendah Tourism Village, Bandung Regency, Indonesia"
+          },
+          quickLinks: {
+            title: "Quick Menu",
+            home: "Home",
+            contact: "Contact Us",
+            reservation: "Reservation"
+          },
+          copyright: "© 2025 ALAMENDAH TOURISM VILLAGE. All rights reserved."
+        },
+        home: {
+          ...textsDataId.home,
+          hero: {
+            title: "Welcome to Alamendah Tourism Village",
+            subtitle: "Explore the beauty of Bandung Regency, enjoy authentic cuisine, and experience unforgettable tourism",
+            ctaButton: "Plan Your Visit"
+          },
+          featured: {
+            badge: "Our Featured",
+            title: "Tourism & Culinary Packages",
+            description: "Discover various tourism and culinary package options that we have prepared specifically for a memorable experience at Alamendah Tourism Village, Bandung Regency"
+          },
+          about: {
+            title: "About Alamendah Tourism Village",
+            description1: "Alamendah Tourism Village in Bandung Regency offers an authentic rural life experience with amazing natural beauty. Enjoy diverse tourism activities, from nature tourism, culture, to delicious traditional cuisine.",
+            description2: "With beautiful mountain views and cool air, Alamendah is the perfect destination to escape from busy city life."
+          },
+          activities: {
+            title: "Activities & Experiences",
+            subtitle: "Various interesting activities await you at Alamendah Tourism Village, Bandung Regency",
+            culture: {
+              title: "Cultural Tourism",
+              description: "Witness local cultural art performances and learn traditions that have been passed down for generations"
+            },
+            nature: {
+              title: "Nature Tourism", 
+              description: "Explore the beauty of nature with tracking, bird watching, and other outdoor activities"
+            },
+            education: {
+              title: "Educational Tourism",
+              description: "Educational programs and workshops to get to know rural life more closely"
+            }
+          },
+          accommodation: {
+            title: "Comfortable Accommodation",
+            description: "Stay with amazing views directly from your room window. Experience the comfort of modern facilities with authentic traditional nuances.",
+            features: [
+              "Beautiful mountain views",
+              "Fresh and cool air", 
+              "Complete and modern facilities"
+            ]
+          },
+          cta: {
+            title: "Ready for an Unforgettable Adventure?",
+            subtitle: "Contact us now and plan your visit to Alamendah Tourism Village, Bandung Regency",
+            emailButton: "Email Us",
+            contactButton: "Contact Us"
+          },
+          errors: {
+            noPackages: "No packages found."
+          }
+        },
+        contact: {
+          title: "Contact Us",
+          subtitle: "Contact us for more information about tourism and culinary packages",
+          contactInfo: {
+            title: "Contact Information",
+            email: {
+              label: "Email",
+              value: config.contact.email,
+              link: "Send us an email"
+            },
+            phone: {
+              label: "Phone",
+              value: config.contact.phone,
+              hours: "Available 08:00 - 17:00 WIB"
+            },
+            location: {
+              label: "Location",
+              value: "Alamendah Tourism Village, Bandung Regency, West Java, Indonesia",
+              note: "Serving tourists from various regions"
+            }
+          }
+        },
+        menu: {
+          header: {
+            title: "Complete Tourism & Culinary Packages",
+            subtitle: "Explore all available tourism and culinary package options at Alamendah Tourism Village, Bandung Regency"
+          },
+          content: {
+            noPackages: "No packages found.",
+            noPackagesSubtitle: "Try selecting a different package category.",
+            showingPackages: "Showing {count} packages",
+            inCategory: "in {category} category"
+          },
+          cta: {
+            title: "Ready to Travel?",
+            subtitle: "Contact our team to plan your visit and get special offers",
+            button: "Contact Us Now"
+          }
+        },
+        modal: {
+          description: "Description",
+          reservation: {
+            title: "Information & Reservation",
+            button: "Reserve Now",
+            emailSubject: "Tourism Package Reservation",
+            emailBody: "I am interested in the package: {packageName}"
+          }
+        },
+        common: {
+          loading: "Loading...",
+          error: "An error occurred",
+          retry: "Try again"
+        },
+        images: textsDataId.images
+      } as Texts
+    }
+  }
 }
 
 // Helper function to replace placeholders in strings

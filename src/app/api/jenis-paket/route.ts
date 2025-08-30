@@ -10,12 +10,13 @@ export async function GET() {
     
     try {
       const result = await client.query(`
-        SELECT id, nama_paket, "createdAt", "updatedAt"
+        SELECT id, nama_paket, nama_paket_en, "createdAt", "updatedAt"
         FROM jenis_paket 
         ORDER BY nama_paket ASC
       `)
       
       console.log('Successfully fetched jenis paket:', result.rows.length, 'items')
+      console.log('Jenis paket data:', result.rows)
       return NextResponse.json(result.rows)
     } finally {
       client.release()

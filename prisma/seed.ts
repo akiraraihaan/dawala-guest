@@ -29,7 +29,8 @@ async function main() {
     where: { id: 1 },
     update: {},
     create: {
-      nama_paket: 'Nasi Box'
+      namaPaket: 'Nasi Box',
+      namaPaketEn: 'Rice Box'
     }
   })
 
@@ -37,7 +38,8 @@ async function main() {
     where: { id: 2 },
     update: {},
     create: {
-      nama_paket: 'Snack Box'
+      namaPaket: 'Snack Box',
+      namaPaketEn: 'Snack Box'
     }
   })
 
@@ -45,7 +47,8 @@ async function main() {
     where: { id: 3 },
     update: {},
     create: {
-      nama_paket: 'Minuman'
+      namaPaket: 'Minuman',
+      namaPaketEn: 'Beverages'
     }
   })
 
@@ -54,11 +57,12 @@ async function main() {
     where: { id: 1 },
     update: {},
     create: {
-      nama_makanan: 'Nasi Gudeg',
+      namaMakanan: 'Nasi Gudeg',
       deskripsi: 'Nasi gudeg khas Yogyakarta dengan lauk ayam dan telur',
-      foto: '/images/nasi-gudeg.jpg',
+      deskripsiEn: 'Traditional Yogyakarta gudeg rice with chicken and egg',
+      foto: '/images/DSC01831.JPG',
       harga: 15000,
-      jenis_paket_id: jenisNasi.id
+      jenisPaketId: jenisNasi.id
     }
   })
 
@@ -66,11 +70,12 @@ async function main() {
     where: { id: 2 },
     update: {},
     create: {
-      nama_makanan: 'Nasi Rendang',
+      namaMakanan: 'Nasi Rendang',
       deskripsi: 'Nasi dengan rendang daging sapi yang empuk dan bumbu rica',
-      foto: '/images/nasi-rendang.jpg',
+      deskripsiEn: 'Rice with tender beef rendang and spicy seasoning',
+      foto: '/images/DSC06062.JPG',
       harga: 18000,
-      jenis_paket_id: jenisNasi.id
+      jenisPaketId: jenisNasi.id
     }
   })
 
@@ -78,11 +83,12 @@ async function main() {
     where: { id: 3 },
     update: {},
     create: {
-      nama_makanan: 'Risoles Mayo',
+      namaMakanan: 'Risoles Mayo',
       deskripsi: 'Risoles isi sayuran dengan mayonaise segar',
-      foto: '/images/risoles.jpg',
+      deskripsiEn: 'Vegetable risoles with fresh mayonnaise',
+      foto: '/images/12.jpg',
       harga: 5000,
-      jenis_paket_id: jenisSnack.id
+      jenisPaketId: jenisSnack.id
     }
   })
 
@@ -90,11 +96,12 @@ async function main() {
     where: { id: 4 },
     update: {},
     create: {
-      nama_makanan: 'Es Teh Manis',
+      namaMakanan: 'Es Teh Manis',
       deskripsi: 'Es teh manis segar',
-      foto: '/images/es-teh.jpg',
+      deskripsiEn: 'Refreshing sweet iced tea',
+      foto: '/images/5.jpg',
       harga: 3000,
-      jenis_paket_id: jenisMinuman.id
+      jenisPaketId: jenisMinuman.id
     }
   })
 

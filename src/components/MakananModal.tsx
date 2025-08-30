@@ -1,10 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Makanan } from '@/types'
 import Image from 'next/image'
-import { getTexts, replacePlaceholders } from '@/lib/texts'
+import { getTexts } from '@/lib/texts'
 import { getSupabaseImageUrl } from '@/lib/config'
+import { usePathname } from 'next/navigation'
+import { getCurrentLocale } from '@/lib/locale'
+import { getFoodDescription } from '@/lib/database-i18n'
 
 interface MakananModalProps {
   makanan: Makanan | null
@@ -16,8 +19,18 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
   // Support single image or array of images from makanan.foto
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isFullscreen, setIsFullscreen] = useState(false)
-  const texts = getTexts()
-  if (!isOpen || !makanan) return null
+  const pathname = usePathname()
+  const locale = getCurrentLocale(pathname)
+  const [texts, setTexts] = useState<any>(null)
+
+  useEffect(() => {
+    const loadTexts = async () => {
+      const loadedTexts = await getTexts(locale)
+      setTexts(loadedTexts)
+    }
+    loadTexts()
+  }, [locale])
+  if (!isOpen || !makanan || !texts) return null
 
   // Helper to get correct image src
   const getImageUrl = (fotoStr: string) => {
@@ -94,7 +107,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
         <div className="bg-white rounded-xl m-2 w-4xl max-h-[90vh] overflow-y-auto">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b">
-            <h2 className="text-2xl font-bold text-gray-800">{makanan.nama_makanan}</h2>
+            <h2 className="text-2xl font-bold text-gray-800">{makanan.namaMakanan}</h2>
             <button 
               onClick={onClose}
               className="text-gray-500 hover:text-gray-700 text-2xl font-semibold cursor-pointer"
@@ -113,7 +126,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
               >
                 <Image
                   src={images[currentImageIndex] || '/placeholder-food.jpg'}
-                  alt={makanan.nama_makanan || 'Gambar makanan'}
+                  alt={makanan.namaMakanan || 'Gambar makanan'}
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-300"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -184,13 +197,13 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-3">{texts.modal.description}</h3>
                 <div className="text-gray-600 leading-relaxed whitespace-pre-line">
-                  {makanan.deskripsi}
+                  {getFoodDescription(makanan, locale)}
                 </div>
               </div>
               <div className="border-t pt-4">
                 <h4 className="font-semibold text-gray-800 mb-2">{texts.modal.reservation.title}</h4>
                 <a 
-                  href={`mailto:${texts.footer.contactInfo.email}?subject=${texts.modal.reservation.emailSubject}&body=${replacePlaceholders(texts.modal.reservation.emailBody, { packageName: makanan.nama_makanan })}`}
+                  href={`mailto:dawaladev@gmail.com?subject=${texts.modal.reservation.emailSubject}&body=${texts.modal.reservation.emailBody.replace('{packageName}', makanan.namaMakanan)}`}
                   className="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -220,7 +233,7 @@ export default function MakananModal({ makanan, isOpen, onClose }: MakananModalP
             <div className="relative w-full h-full flex items-center justify-center">
               <Image
                 src={images[currentImageIndex] || '/placeholder-food.jpg'}
-                alt={makanan.nama_makanan || 'Gambar makanan'}
+                alt={makanan.namaMakanan || 'Gambar makanan'}
                 fill
                 className="object-contain"
                 sizes="100vw"

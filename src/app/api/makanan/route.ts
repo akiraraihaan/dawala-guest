@@ -3,7 +3,7 @@ import pool from '@/lib/postgres'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
-  const jenisPaketId = searchParams.get('jenis_paket_id')
+  const jenisPaketId = searchParams.get('jenisPaketId')
   
   try {
     console.log('API makanan called - using direct PostgreSQL connection')

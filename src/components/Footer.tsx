@@ -1,7 +1,43 @@
-import { getTexts } from '@/lib/texts'
+'use client'
 
-export default function Footer() {
-  const texts = getTexts()
+import { useState, useEffect } from 'react'
+import { getTexts } from '@/lib/texts'
+import { getCurrentLocale } from '@/lib/locale'
+
+interface FooterProps {
+  locale?: 'id' | 'en'
+}
+
+export default function Footer({ locale }: FooterProps) {
+  const [texts, setTexts] = useState<any>(null)
+  const [currentLocale, setCurrentLocale] = useState<'id' | 'en'>('id')
+
+  useEffect(() => {
+    // Use provided locale or get from localStorage
+    const finalLocale = locale || getCurrentLocale(window.location.pathname)
+    setCurrentLocale(finalLocale)
+    
+    const loadTexts = async () => {
+      const loadedTexts = await getTexts(finalLocale)
+      setTexts(loadedTexts)
+    }
+    loadTexts()
+  }, [locale])
+
+  if (!texts) {
+    return (
+      <footer className="bg-gray-800 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="h-32 bg-gray-700 rounded animate-pulse"></div>
+            <div className="h-32 bg-gray-700 rounded animate-pulse"></div>
+            <div className="h-32 bg-gray-700 rounded animate-pulse"></div>
+          </div>
+        </div>
+      </footer>
+    )
+  }
+
   return (
     <footer className="bg-gray-800 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -37,7 +73,7 @@ export default function Footer() {
               <a href="/contact" className="block text-gray-300 hover:text-white transition-colors">
                 {texts.footer.quickLinks.contact}
               </a>
-              <a href={`mailto:${texts.footer.contactInfo.email}`} className="block text-gray-300 hover:text-white transition-colors">
+              <a href="mailto:dawaladev@gmail.com" className="block text-gray-300 hover:text-white transition-colors">
                 {texts.footer.quickLinks.reservation}
               </a>
             </div>

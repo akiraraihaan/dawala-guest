@@ -1,9 +1,35 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { getTexts } from '@/lib/texts'
+import { usePathname } from 'next/navigation'
+import { getCurrentLocale } from '@/lib/locale'
 
 export default function Contact() {
-  const texts = getTexts()
+  const pathname = usePathname()
+  const locale = getCurrentLocale(pathname)
+  const [texts, setTexts] = useState<any>(null)
+
+  useEffect(() => {
+    const loadTexts = async () => {
+      const loadedTexts = await getTexts(locale)
+      setTexts(loadedTexts)
+    }
+    loadTexts()
+  }, [locale])
+  if (!texts) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading translations...</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -61,7 +87,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <Footer />
+      <Footer locale={locale} />
     </div>
   )
 }
