@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Desa Wisata Alamendah",
   description: "Website resmi Desa Wisata Alamendah",
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({

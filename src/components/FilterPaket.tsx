@@ -10,12 +10,12 @@ interface FilterPaketProps {
 
 export default function FilterPaket({ jenisPaket, selectedPaket, onSelectPaket, locale = 'id' }: FilterPaketProps) {
   return (
-    <div className="mb-8">
-      <h3 className="text-lg font-semibold text-gray-800 mb-4">Filter berdasarkan Kategori</h3>
-      <div className="flex flex-wrap gap-2">
+    <div className="mb-6 sm:mb-8">
+      <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-3 sm:mb-4 px-4 sm:px-0">Filter berdasarkan Kategori</h3>
+      <div className="flex flex-wrap gap-2 sm:gap-3 px-4 sm:px-0">
         <button
           onClick={() => onSelectPaket(null)}
-          className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors ${
+          className={`px-3 sm:px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors min-h-[44px] ${
             selectedPaket === null
               ? 'bg-green-600 text-white'
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -27,7 +27,7 @@ export default function FilterPaket({ jenisPaket, selectedPaket, onSelectPaket, 
           <button
             key={paket.id}
             onClick={() => onSelectPaket(paket.id)}
-            className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors ${
+            className={`px-3 sm:px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors min-h-[44px] ${
               selectedPaket === paket.id
                 ? 'bg-green-600 text-white'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'

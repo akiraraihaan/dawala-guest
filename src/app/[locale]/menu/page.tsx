@@ -95,22 +95,22 @@ export default function Menu() {
       <Header />
       
       {/* Menu Header */}
-      <section className="min-h-[500px] bg-gradient-to-r from-green-600 to-green-800 text-white py-16 flex items-center">
+      <section className="min-h-[400px] sm:min-h-[500px] bg-gradient-to-r from-green-600 to-green-800 text-white py-12 sm:py-16 flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center h-fit">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             {texts.menu.header.title}
           </h1>
-          <p className="text-xl max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl max-w-2xl mx-auto">
             {texts.menu.header.subtitle}
           </p>
         </div>
       </section>
 
       {/* Menu Content */}
-      <section className="py-16">
+      <section className="py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-8">
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-8 mx-4 sm:mx-0">
               {error}
             </div>
           )}
@@ -127,14 +127,14 @@ export default function Menu() {
               />
 
               {filteredMakanan.length === 0 ? (
-                <div className="text-center py-12">
-                  <p className="text-gray-600 text-lg">{texts.menu.content.noPackages}</p>
+                <div className="text-center py-12 px-4">
+                  <p className="text-gray-600 text-base sm:text-lg">{texts.menu.content.noPackages}</p>
                   <p className="text-gray-500 text-sm mt-2">{texts.menu.content.noPackagesSubtitle}</p>
                 </div>
               ) : (
                 <>
-                  <div className="text-center mb-8">
-                    <p className="text-gray-600">
+                  <div className="text-center mb-6 sm:mb-8 px-4 sm:px-0">
+                    <p className="text-gray-600 text-sm sm:text-base">
                       {texts.menu.content.showingPackages.replace('{count}', filteredMakanan.length.toString())}
                       {selectedPaket && (
                         <span className="ml-1">
@@ -144,7 +144,7 @@ export default function Menu() {
                     </p>
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredMakanan.map((item) => (
                       <MakananCard key={item.id} makanan={item} locale={locale} />
                     ))}
@@ -157,17 +157,17 @@ export default function Menu() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-green-600 text-white py-16">
+      <section className="bg-green-600 text-white py-12 sm:py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">
             {texts.menu.cta.title}
           </h2>
-          <p className="text-xl mb-8">
+          <p className="text-lg sm:text-xl mb-6 sm:mb-8 px-4">
             {texts.menu.cta.subtitle}
           </p>
           <a 
             href="mailto:dawaladev@gmail.com"
-            className="inline-block bg-white text-green-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors"
+            className="inline-block bg-white text-green-600 px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-100 transition-colors"
           >
             {texts.menu.cta.button}
           </a>

@@ -9,6 +9,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [texts, setTexts] = useState<any>(null);
   const pathname = usePathname();
   const locale = getCurrentLocale(pathname);
@@ -53,43 +54,50 @@ export default function Header() {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-lg py-3' 
-        : 'bg-white/90 backdrop-blur-sm shadow-md py-6'
+        ? 'bg-white/95 backdrop-blur-md shadow-lg py-2' 
+        : 'bg-white/90 backdrop-blur-sm shadow-md py-4'
     }`}>
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex justify-between items-center">
-          <div className="flex justify-center lg:justify-start">
+          {/* Logo */}
+          <div className="flex items-center flex-shrink-0">
             <Link href="/" className="flex items-center">
               <img
                 src="/Dawala.png"
                 alt={texts.header.logoAlt}
                 className={`w-auto transition-all duration-300 ${
-                  isScrolled ? 'h-10' : 'h-12'
+                  isScrolled ? 'h-8 sm:h-10' : 'h-10 sm:h-12'
                 }`}
               />
             </Link>
           </div>
-          <nav className="hidden md:flex space-x-8">
-            <Link 
-              href="/" 
-              className="text-gray-600 hover:text-green-600 transition-colors font-medium"
-            >
-              {texts.header.navigation.home}
-            </Link>
-            <Link 
-              href="/menu" 
-              className="text-gray-600 hover:text-green-600 transition-colors font-medium"
-            >
-              {texts.header.navigation.menu}
-            </Link>
-            <Link 
-              href="/contact" 
-              className="text-gray-600 hover:text-green-600 transition-colors font-medium"
-            >
-              {texts.header.navigation.contact}
-            </Link>
+
+          {/* Desktop Navigation - Centered */}
+          <nav className="hidden md:flex items-center justify-center flex-1 mx-8">
+            <div className="flex items-center space-x-8">
+              <Link 
+                href="/" 
+                className="text-gray-600 hover:text-green-600 transition-colors font-medium"
+              >
+                {texts.header.navigation.home}
+              </Link>
+              <Link 
+                href="/menu" 
+                className="text-gray-600 hover:text-green-600 transition-colors font-medium"
+              >
+                {texts.header.navigation.menu}
+              </Link>
+              <Link 
+                href="/contact" 
+                className="text-gray-600 hover:text-green-600 transition-colors font-medium"
+              >
+                {texts.header.navigation.contact}
+              </Link>
+            </div>
           </nav>
-          <div className="flex items-center space-x-4">
+
+          {/* Right Side - Language & Contact */}
+          <div className="hidden md:flex items-center space-x-4 flex-shrink-0">
             <LanguageSwitcher />
             <a 
               href="mailto:dawaladev@gmail.com"
@@ -100,7 +108,66 @@ export default function Header() {
               {texts.header.contactButton}
             </a>
           </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center space-x-2">
+            <LanguageSwitcher />
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 rounded-md text-gray-600 hover:text-green-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+              aria-label="Toggle mobile menu"
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isMobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-gray-200 mt-4 pt-4">
+            <div className="flex flex-col space-y-4">
+              <Link 
+                href="/" 
+                className="text-gray-600 hover:text-green-600 transition-colors font-medium block py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {texts.header.navigation.home}
+              </Link>
+              <Link 
+                href="/menu" 
+                className="text-gray-600 hover:text-green-600 transition-colors font-medium block py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {texts.header.navigation.menu}
+              </Link>
+              <Link 
+                href="/contact" 
+                className="text-gray-600 hover:text-green-600 transition-colors font-medium block py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {texts.header.navigation.contact}
+              </Link>
+              <a 
+                href="mailto:dawaladev@gmail.com"
+                className="bg-green-600 text-white px-4 py-3 rounded-md text-center font-medium hover:bg-green-700 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {texts.header.contactButton}
+              </a>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

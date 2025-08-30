@@ -92,7 +92,7 @@ export default function MakananCard({ makanan, onClick, locale = 'id' }: Makanan
       className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:scale-105"
       onClick={onClick}
     >
-      <div className="relative h-48 w-full">
+      <div className="relative h-48 sm:h-52 w-full">
         {(() => {
           // Always use first valid image string
           let imageUrl = getFirstValidImage(makanan.foto);
@@ -109,19 +109,19 @@ export default function MakananCard({ makanan, onClick, locale = 'id' }: Makanan
           );
         })()}
       </div>
-      <div className="p-4">
-        <h3 className="font-semibold text-lg text-gray-800 mb-2">
+      <div className="p-4 sm:p-5">
+        <h3 className="font-semibold text-base sm:text-lg text-gray-800 mb-2 line-clamp-1">
           {makanan.namaMakanan}
         </h3>
-        <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+        <p className="text-gray-600 text-sm sm:text-base mb-3 line-clamp-2">
           {getFoodDescription(makanan, locale)}
         </p>
-        <div className="flex justify-between items-center">
-          <span className="text-lg font-bold text-green-600">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
+          <span className="text-lg sm:text-xl font-bold text-green-600">
             {formatRupiah(makanan.harga)}
           </span>
           {makanan.jenisPaket && (
-            <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
+            <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-1 rounded self-start sm:self-auto">
               {getPackageName(makanan.jenisPaket || {}, locale)}
             </span>
           )}

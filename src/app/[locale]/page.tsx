@@ -123,16 +123,16 @@ export default function Home() {
         </div>
         
         {/* Hero Content */}
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
+        <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 drop-shadow-lg">
             {texts.home.hero.title}
           </h1>
-          <p className="text-xl md:text-2xl mb-8 drop-shadow-lg">
+          <p className="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 drop-shadow-lg px-4">
             {texts.home.hero.subtitle}
           </p>
           <a 
             href="mailto:dawaladev@gmail.com"
-            className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg"
+            className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-colors shadow-lg"
           >
             {texts.home.hero.ctaButton}
           </a>
@@ -140,27 +140,27 @@ export default function Home() {
       </section>
 
       {/* Featured Menu Section - Highlighted */}
-      <section className="py-20 bg-gradient-to-b from-white to-gray-50 relative">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-gray-50 relative">
         {/* Decorative elements */}
         <div className="absolute inset-0 bg-gradient-to-r from-green-50/30 to-blue-50/30"></div>
         <div className="relative z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <div className="text-center mb-12 sm:mb-16">
               <div className="inline-block">
-                <span className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold tracking-wide uppercase mb-4 inline-block">
+                <span className="bg-green-600 text-white px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wide uppercase mb-4 inline-block">
                   {texts.home.featured.badge}
                 </span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 sm:mb-6">
                 {texts.home.featured.title}
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
                 {texts.home.featured.description}
               </p>
             </div>
 
             {error && (
-              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-8">
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-8 mx-4 sm:mx-0">
                 {error}
               </div>
             )}
@@ -169,7 +169,7 @@ export default function Home() {
               <LoadingCards />
             ) : (
               <>
-                <div className="mb-12">
+                <div className="mb-8 sm:mb-12">
                   <FilterPaket 
                     jenisPaket={jenisPaket}
                     selectedPaket={selectedPaket}
@@ -183,7 +183,7 @@ export default function Home() {
                     <p className="text-gray-600 text-lg">{texts.home.errors.noPackages}</p>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {filteredMakanan.map((item) => (
                       <div key={item.id} className="transform hover:scale-105 transition-all duration-300">
                         <MakananCard 
@@ -202,21 +202,21 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+            <div className="order-2 lg:order-1">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6">
                 {texts.home.about.title}
               </h2>
-              <p className="text-lg text-gray-600 mb-6">
+              <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
                 {texts.home.about.description1}
               </p>
-              <p className="text-lg text-gray-600">
+              <p className="text-base sm:text-lg text-gray-600">
                 {texts.home.about.description2}
               </p>
             </div>
-            <div className="relative h-96 rounded-lg overflow-hidden shadow-lg">
+            <div className="relative h-64 sm:h-80 lg:h-96 rounded-lg overflow-hidden shadow-lg order-1 lg:order-2">
               <Image
                 src={texts.images.about}
                 alt="Suasana Desa Wisata Alamendah"
@@ -229,21 +229,21 @@ export default function Home() {
       </section>
 
       {/* Activities Gallery */}
-      <section className="py-16 bg-gray-100">
+      <section className="py-12 sm:py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
               {texts.home.activities.title}
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
               {texts.home.activities.subtitle}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Card 1 - Budaya */}
             <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-              <div className="relative h-64">
+              <div className="relative h-48 sm:h-64">
                 <Image
                   src={texts.images.activities.culture}
                   alt="Wisata Budaya"
@@ -251,9 +251,9 @@ export default function Home() {
                   className="object-cover"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">{texts.home.activities.culture.title}</h3>
-                <p className="text-gray-600">
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">{texts.home.activities.culture.title}</h3>
+                <p className="text-sm sm:text-base text-gray-600">
                   {texts.home.activities.culture.description}
                 </p>
               </div>
@@ -261,7 +261,7 @@ export default function Home() {
 
             {/* Card 2 - Alam */}
             <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-              <div className="relative h-64">
+              <div className="relative h-48 sm:h-64">
                 <Image
                   src={texts.images.activities.nature}
                   alt="Wisata Alam"
@@ -269,17 +269,17 @@ export default function Home() {
                   className="object-cover"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">{texts.home.activities.nature.title}</h3>
-                <p className="text-gray-600">
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">{texts.home.activities.nature.title}</h3>
+                <p className="text-sm sm:text-base text-gray-600">
                   {texts.home.activities.nature.description}
                 </p>
               </div>
             </div>
 
             {/* Card 3 - Edukasi */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-              <div className="relative h-64">
+            <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow sm:col-span-2 lg:col-span-1 sm:mx-auto lg:mx-0 max-w-sm sm:max-w-none">
+              <div className="relative h-48 sm:h-64">
                 <Image
                   src={texts.images.activities.education}
                   alt="Wisata Edukasi"
@@ -287,9 +287,9 @@ export default function Home() {
                   className="object-cover"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">{texts.home.activities.education.title}</h3>
-                <p className="text-gray-600">
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">{texts.home.activities.education.title}</h3>
+                <p className="text-sm sm:text-base text-gray-600">
                   {texts.home.activities.education.description}
                 </p>
               </div>
@@ -299,10 +299,10 @@ export default function Home() {
       </section>
 
       {/* Comfort & Accommodation Section */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative h-96 rounded-lg overflow-hidden shadow-lg">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+            <div className="relative h-64 sm:h-80 lg:h-96 rounded-lg overflow-hidden shadow-lg">
               <Image
                 src={texts.images.accommodation}
                 alt="Pemandangan dari Akomodasi"
@@ -311,17 +311,17 @@ export default function Home() {
               />
             </div>
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6">
                 {texts.home.accommodation.title}
               </h2>
-              <p className="text-lg text-gray-600 mb-6">
+              <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
                 {texts.home.accommodation.description}
               </p>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {texts.home.accommodation.features.map((feature, index) => (
                   <div key={index} className="flex items-center">
-                    <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                    <span className="text-gray-700">{feature}</span>
+                    <div className="w-2 h-2 bg-green-600 rounded-full mr-3 flex-shrink-0"></div>
+                    <span className="text-sm sm:text-base text-gray-700">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -331,24 +331,24 @@ export default function Home() {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-16 bg-gradient-to-r from-green-600 to-green-800">
+      <section className="py-12 sm:py-16 bg-gradient-to-r from-green-600 to-green-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
             {texts.home.cta.title}
           </h2>
-          <p className="text-xl text-green-100 mb-8">
+          <p className="text-lg sm:text-xl text-green-100 mb-6 sm:mb-8 px-4">
             {texts.home.cta.subtitle}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
             <a 
               href={`mailto:${texts.footer.contactInfo.email}`}
-              className="inline-block bg-white text-green-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg"
+              className="inline-block bg-white text-green-600 px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-100 transition-colors shadow-lg"
             >
               {texts.home.cta.emailButton}
             </a>
             <a 
               href="tel:+62123456789"
-              className="inline-block bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-white hover:text-green-600 transition-colors"
+              className="inline-block bg-transparent border-2 border-white text-white px-6 sm:px-8 py-3 rounded-lg font-semibold text-base sm:text-lg hover:bg-white hover:text-green-600 transition-colors"
             >
               {texts.home.cta.contactButton}
             </a>
