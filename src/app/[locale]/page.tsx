@@ -318,7 +318,7 @@ export default function Home() {
                 {texts.home.accommodation.description}
               </p>
               <div className="space-y-3 sm:space-y-4">
-                {texts.home.accommodation.features.map((feature, index) => (
+                {texts.home.accommodation.features.map((feature: string, index: number) => (
                   <div key={index} className="flex items-center">
                     <div className="w-2 h-2 bg-green-600 rounded-full mr-3 flex-shrink-0"></div>
                     <span className="text-sm sm:text-base text-gray-700">{feature}</span>
