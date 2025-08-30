@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Makanan } from '@/types'
+import { getSupabaseImageUrl } from '@/lib/config'
 
 interface MakananCardProps {
   makanan: Makanan
@@ -67,17 +68,9 @@ export default function MakananCard({ makanan, onClick }: MakananCardProps) {
     return '';
   };
 
-  // Supabase Storage public base URL for 'gastronomi' bucket
-  const SUPABASE_BASE_URL =
-    'https://iroaauayoqlfsetgtlec.supabase.co/storage/v1/object/public/gastronomi';
-
   // Helper to get correct image src
   const getImageUrl = (fotoStr: string) => {
-    if (!fotoStr) return '/placeholder-food.jpg';
-    if (fotoStr.startsWith('data:image')) return fotoStr;
-    if (fotoStr.startsWith('http')) return fotoStr;
-    // Jika fotoStr sudah mengandung subfolder (misal: makanan/...), langsung gabung
-    return `${SUPABASE_BASE_URL}/${fotoStr}`;
+    return getSupabaseImageUrl(fotoStr);
   };
 
 

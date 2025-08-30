@@ -9,6 +9,7 @@ import MakananModal from '@/components/MakananModal'
 import FilterPaket from '@/components/FilterPaket'
 import { LoadingCards } from '@/components/LoadingSpinner'
 import { JenisPaket, Makanan } from '@/types'
+import { getTexts } from '@/lib/texts'
 
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null)
   const [selectedMakanan, setSelectedMakanan] = useState<Makanan | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const texts = getTexts()
 
 
   useEffect(() => {
@@ -89,7 +91,7 @@ export default function Home() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/DSC06062.JPG"
+            src={texts.images.hero}
             alt="Pemandangan Desa Wisata Alamendah"
             fill
             className="object-cover brightness-50"
@@ -100,16 +102,16 @@ export default function Home() {
         {/* Hero Content */}
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
-            Selamat Datang di Desa Wisata Alamendah
+            {texts.home.hero.title}
           </h1>
           <p className="text-xl md:text-2xl mb-8 drop-shadow-lg">
-            Jelajahi keindahan alam Kabupaten Bandung, nikmati kuliner autentik, dan rasakan pengalaman wisata yang tak terlupakan
+            {texts.home.hero.subtitle}
           </p>
           <a 
-            href="mailto:dawaladev@gmail.com"
+            href={`mailto:${texts.footer.contactInfo.email}`}
             className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg"
           >
-            Rencanakan Kunjungan
+            {texts.home.hero.ctaButton}
           </a>
         </div>
       </section>
@@ -123,14 +125,14 @@ export default function Home() {
             <div className="text-center mb-16">
               <div className="inline-block">
                 <span className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold tracking-wide uppercase mb-4 inline-block">
-                  Unggulan Kami
+                  {texts.home.featured.badge}
                 </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                Paket Wisata & Kuliner
+                {texts.home.featured.title}
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Temukan berbagai pilihan paket wisata dan kuliner yang telah kami siapkan khusus untuk pengalaman yang berkesan di Desa Wisata Alamendah, Kabupaten Bandung
+                {texts.home.featured.description}
               </p>
             </div>
 
@@ -154,7 +156,7 @@ export default function Home() {
 
                 {filteredMakanan.length === 0 ? (
                   <div className="text-center py-12">
-                    <p className="text-gray-600 text-lg">Tidak ada paket yang ditemukan.</p>
+                    <p className="text-gray-600 text-lg">{texts.home.errors.noPackages}</p>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -180,20 +182,18 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                Tentang Desa Wisata Alamendah
+                {texts.home.about.title}
               </h2>
               <p className="text-lg text-gray-600 mb-6">
-                Desa Wisata Alamendah di Kabupaten Bandung menawarkan pengalaman autentik kehidupan pedesaan dengan keindahan alam yang menakjubkan. 
-                Nikmati aktivitas wisata yang beragam, mulai dari wisata alam, budaya, hingga kuliner tradisional yang lezat.
+                {texts.home.about.description1}
               </p>
               <p className="text-lg text-gray-600">
-                Dengan pemandangan pegunungan yang indah dan udara yang sejuk, Alamendah adalah destinasi sempurna untuk 
-                melepas penat dari kehidupan kota yang sibuk.
+                {texts.home.about.description2}
               </p>
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/images/Desa Wisata Alamendah (118).JPG"
+                src={texts.images.about}
                 alt="Suasana Desa Wisata Alamendah"
                 fill
                 className="object-cover"
@@ -208,10 +208,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-              Aktivitas & Pengalaman
+              {texts.home.activities.title}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Berbagai kegiatan menarik menanti Anda di Desa Wisata Alamendah, Kabupaten Bandung
+              {texts.home.activities.subtitle}
             </p>
           </div>
 
@@ -220,16 +220,16 @@ export default function Home() {
             <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
               <div className="relative h-64">
                 <Image
-                  src="/images/12.jpg"
+                  src={texts.images.activities.culture}
                   alt="Wisata Budaya"
                   fill
                   className="object-cover"
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">Wisata Budaya</h3>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">{texts.home.activities.culture.title}</h3>
                 <p className="text-gray-600">
-                  Saksikan pertunjukan seni budaya lokal dan pelajari tradisi yang telah turun temurun
+                  {texts.home.activities.culture.description}
                 </p>
               </div>
             </div>
@@ -238,16 +238,16 @@ export default function Home() {
             <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
               <div className="relative h-64">
                 <Image
-                  src="/images/DSC01831.JPG"
+                  src={texts.images.activities.nature}
                   alt="Wisata Alam"
                   fill
                   className="object-cover"
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">Wisata Alam</h3>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">{texts.home.activities.nature.title}</h3>
                 <p className="text-gray-600">
-                  Jelajahi keindahan alam dengan tracking, bird watching, dan aktivitas outdoor lainnya
+                  {texts.home.activities.nature.description}
                 </p>
               </div>
             </div>
@@ -256,16 +256,16 @@ export default function Home() {
             <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
               <div className="relative h-64">
                 <Image
-                  src="/images/5.jpg"
+                  src={texts.images.activities.education}
                   alt="Wisata Edukasi"
                   fill
                   className="object-cover"
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">Wisata Edukasi</h3>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">{texts.home.activities.education.title}</h3>
                 <p className="text-gray-600">
-                  Program edukasi dan workshop untuk mengenal lebih dekat kehidupan pedesaan
+                  {texts.home.activities.education.description}
                 </p>
               </div>
             </div>
@@ -279,7 +279,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative h-96 rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/images/WhatsApp Image 2022-12-01 at 15.37.06.jpeg"
+                src={texts.images.accommodation}
                 alt="Pemandangan dari Akomodasi"
                 fill
                 className="object-cover"
@@ -287,25 +287,18 @@ export default function Home() {
             </div>
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                Akomodasi yang Nyaman
+                {texts.home.accommodation.title}
               </h2>
               <p className="text-lg text-gray-600 mb-6">
-                Menginaplah dengan pemandangan yang menakjubkan langsung dari jendela kamar Anda. 
-                Rasakan kenyamanan fasilitas modern dengan nuansa tradisional yang autentik.
+                {texts.home.accommodation.description}
               </p>
               <div className="space-y-4">
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                  <span className="text-gray-700">Pemandangan pegunungan yang indah</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                  <span className="text-gray-700">Udara segar dan sejuk</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                  <span className="text-gray-700">Fasilitas lengkap dan modern</span>
-                </div>
+                {texts.home.accommodation.features.map((feature, index) => (
+                  <div key={index} className="flex items-center">
+                    <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
+                    <span className="text-gray-700">{feature}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -316,23 +309,23 @@ export default function Home() {
       <section className="py-16 bg-gradient-to-r from-green-600 to-green-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Siap untuk Petualangan yang Tak Terlupakan?
+            {texts.home.cta.title}
           </h2>
           <p className="text-xl text-green-100 mb-8">
-            Hubungi kami sekarang dan rencanakan kunjungan Anda ke Desa Wisata Alamendah, Kabupaten Bandung
+            {texts.home.cta.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="mailto:dawaladev@gmail.com"
+              href={`mailto:${texts.footer.contactInfo.email}`}
               className="inline-block bg-white text-green-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg"
             >
-              Email Kami
+              {texts.home.cta.emailButton}
             </a>
             <a 
               href="tel:+62123456789"
               className="inline-block bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-white hover:text-green-600 transition-colors"
             >
-              Hubungi Kami
+              {texts.home.cta.contactButton}
             </a>
           </div>
         </div>

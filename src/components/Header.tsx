@@ -1,10 +1,12 @@
 "use client"
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { getTexts } from '@/lib/texts';
 
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const texts = getTexts();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,8 +29,8 @@ export default function Header() {
           <div className="flex justify-center lg:justify-start">
             <Link href="/" className="flex items-center">
               <img
-                src="/Dawala.png"
-                alt="Logo Alamendah"
+                src={texts.images.logo}
+                alt={texts.header.logoAlt}
                 className={`w-auto transition-all duration-300 ${
                   isScrolled ? 'h-10' : 'h-12'
                 }`}
@@ -40,29 +42,29 @@ export default function Header() {
               href="/" 
               className="text-gray-600 hover:text-green-600 transition-colors font-medium"
             >
-              Beranda
+              {texts.header.navigation.home}
             </Link>
             <Link 
               href="/menu" 
               className="text-gray-600 hover:text-green-600 transition-colors font-medium"
             >
-              Menu
+              {texts.header.navigation.menu}
             </Link>
             <Link 
               href="/contact" 
               className="text-gray-600 hover:text-green-600 transition-colors font-medium"
             >
-              Kontak
+              {texts.header.navigation.contact}
             </Link>
           </nav>
           <div className="flex items-center space-x-2">
             <a 
-              href="mailto:dawaladev@gmail.com"
+              href={`mailto:${texts.footer.contactInfo.email}`}
               className={`bg-green-600 text-white rounded-md text-sm font-medium hover:bg-green-700 transition-all duration-300 ${
                 isScrolled ? 'px-3 py-2' : 'px-4 py-2'
               }`}
             >
-              Hubungi Kami
+              {texts.header.contactButton}
             </a>
           </div>
         </div>

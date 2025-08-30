@@ -11,9 +11,9 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'iroaauayoqlfsetgtlec.supabase.co',
+        hostname: process.env.NEXT_PUBLIC_SUPABASE_URL?.replace('https://', '') || 'iroaauayoqlfsetgtlec.supabase.co',
         port: '',
-        pathname: '/storage/v1/object/public/gastronomi/**',
+        pathname: '/storage/v1/object/public/**',
       },
     ],
   },
