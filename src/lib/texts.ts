@@ -234,7 +234,7 @@ export const getTexts = async (locale: 'id' | 'en' = 'id'): Promise<Texts> => {
     },
     "home": {
       "hero": {
-        "title": "Selamat Datang di Desa Wisata Alamendah hahah",
+        "title": "Selamat Datang di Desa Wisata Alamendah",
         "subtitle": "Jelajahi keindahan alam Kabupaten Bandung, nikmati kuliner autentik, dan rasakan pengalaman wisata yang tak terlupakan",
         "ctaButton": "Rencanakan Kunjungan"
       },
