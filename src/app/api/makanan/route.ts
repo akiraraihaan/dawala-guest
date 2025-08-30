@@ -13,14 +13,30 @@ export async function GET(request: NextRequest) {
     
     if (jenisPaketId) {
       query = `
-        SELECT * FROM makanan 
+        SELECT 
+          id,
+          nama_makanan as "namaMakanan",
+          deskripsi,
+          deskripsi_en as "deskripsiEn",
+          foto,
+          harga,
+          jenis_paket_id as "jenisPaketId"
+        FROM makanan 
         WHERE jenis_paket_id = $1
         ORDER BY nama_makanan ASC
       `
       queryParams = [parseInt(jenisPaketId)]
     } else {
       query = `
-        SELECT * FROM makanan 
+        SELECT 
+          id,
+          nama_makanan as "namaMakanan",
+          deskripsi,
+          deskripsi_en as "deskripsiEn",
+          foto,
+          harga,
+          jenis_paket_id as "jenisPaketId"
+        FROM makanan 
         ORDER BY nama_makanan ASC
       `
     }

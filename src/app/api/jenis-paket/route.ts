@@ -10,7 +10,10 @@ export async function GET() {
     
     try {
       const result = await client.query(`
-        SELECT id, nama_paket, nama_paket_en, "createdAt", "updatedAt"
+        SELECT 
+          id,
+          nama_paket as "namaPaket",
+          nama_paket_en as "namaPaketEn"
         FROM jenis_paket 
         ORDER BY nama_paket ASC
       `)
