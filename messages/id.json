@@ -75,6 +75,15 @@
     },
     "errors": {
       "noPackages": "Tidak ada paket yang ditemukan."
+    },
+    "search": {
+      "placeholder": "Cari paket berdasarkan nama atau deskripsi...",
+      "results": "Ditemukan {count} paket",
+      "forQuery": "untuk pencarian {query}",
+      "inCategory": "dalam kategori yang dipilih",
+      "clearFilters": "Hapus semua filter",
+      "noResults": "Tidak ada paket yang cocok dengan pencarian",
+      "tryDifferent": "Coba kata kunci atau filter yang berbeda"
     }
   },
   "contact": {

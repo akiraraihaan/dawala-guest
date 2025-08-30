@@ -5,17 +5,19 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import MakananCard from '@/components/MakananCard'
 import FilterPaket from '@/components/FilterPaket'
+import SearchBar from '@/components/SearchBar'
 import { LoadingCards } from '@/components/LoadingSpinner'
 import { JenisPaket, Makanan } from '@/types'
 import { getTexts } from '@/lib/texts'
 import { usePathname } from 'next/navigation'
 import { getCurrentLocale } from '@/lib/locale'
-import { getPackageName } from '@/lib/database-i18n'
+import { getPackageName, getFoodDescription } from '@/lib/database-i18n'
 
 export default function Menu() {
   const [makanan, setMakanan] = useState<Makanan[]>([])
   const [jenisPaket, setJenisPaket] = useState<JenisPaket[]>([])
   const [selectedPaket, setSelectedPaket] = useState<number | null>(null)
+  const [searchQuery, setSearchQuery] = useState<string>('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const pathname = usePathname()
@@ -75,9 +77,18 @@ export default function Menu() {
     fetchData()
   }, [])
 
-  const filteredMakanan = selectedPaket
-    ? makanan.filter(item => item.jenisPaketId === selectedPaket)
-    : makanan
+  // Filter function for search and category
+  const filteredMakanan = makanan.filter((item) => {
+    // Filter by category
+    const matchesCategory = selectedPaket === null || item.jenisPaketId === selectedPaket
+    
+    // Filter by search query (search in name and description)
+    const matchesSearch = searchQuery === '' || 
+      item.namaMakanan.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      getFoodDescription(item, locale).toLowerCase().includes(searchQuery.toLowerCase())
+    
+    return matchesCategory && matchesSearch
+  })
 
   if (!texts) {
     return (
@@ -119,7 +130,15 @@ export default function Menu() {
             <LoadingCards />
           ) : (
             <>
-                            <FilterPaket
+              {/* Search Bar */}
+              <SearchBar 
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+                placeholder={texts?.home?.search?.placeholder || "Cari paket..."}
+              />
+
+              {/* Filter Paket */}
+              <FilterPaket
                 jenisPaket={jenisPaket}
                 selectedPaket={selectedPaket}
                 onSelectPaket={setSelectedPaket}
@@ -128,20 +147,50 @@ export default function Menu() {
 
               {filteredMakanan.length === 0 ? (
                 <div className="text-center py-12 px-4">
-                  <p className="text-gray-600 text-base sm:text-lg">{texts.menu.content.noPackages}</p>
-                  <p className="text-gray-500 text-sm mt-2">{texts.menu.content.noPackagesSubtitle}</p>
+                  <div className="mb-4">
+                    <svg className="mx-auto h-16 w-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-600 text-base sm:text-lg mb-2">
+                    {searchQuery || selectedPaket ? (texts?.home?.search?.noResults || "No packages match your search") : (texts?.menu?.content?.noPackages || "No packages found")}
+                  </p>
+                  {searchQuery || selectedPaket ? (
+                    <p className="text-gray-500 text-sm">
+                      {texts?.home?.search?.tryDifferent || "Try different keywords or filters"}
+                    </p>
+                  ) : (
+                    <p className="text-gray-500 text-sm">{texts?.menu?.content?.noPackagesSubtitle || "Try selecting a different category"}</p>
+                  )}
                 </div>
               ) : (
                 <>
+                  {/* Results Info */}
                   <div className="text-center mb-6 sm:mb-8 px-4 sm:px-0">
                     <p className="text-gray-600 text-sm sm:text-base">
-                      {texts.menu.content.showingPackages.replace('{count}', filteredMakanan.length.toString())}
+                      {texts?.home?.search?.results?.replace('{count}', filteredMakanan.length.toString()) || `Found ${filteredMakanan.length} packages`}
+                      {searchQuery && (
+                        <span className="font-medium">
+                          {' '}{texts?.home?.search?.forQuery?.replace('{query}', `"${searchQuery}"`) || `for "${searchQuery}"`}
+                        </span>
+                      )}
                       {selectedPaket && (
-                        <span className="ml-1">
-                          {texts.menu.content.inCategory.replace('{category}', getPackageName(jenisPaket.find(p => p.id === selectedPaket) || {}, locale))}
+                        <span className="font-medium">
+                          {' '}{texts?.home?.search?.inCategory || "in selected category"}
                         </span>
                       )}
                     </p>
+                    {(searchQuery || selectedPaket) && (
+                      <button
+                        onClick={() => {
+                          setSearchQuery('')
+                          setSelectedPaket(null)
+                        }}
+                        className="mt-2 text-green-600 hover:text-green-700 text-sm font-medium transition-colors"
+                      >
+                        {texts?.home?.search?.clearFilters || "Clear all filters"}
+                      </button>
+                    )}
                   </div>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

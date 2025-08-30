@@ -75,6 +75,15 @@
     },
     "errors": {
       "noPackages": "No packages found."
+    },
+    "search": {
+      "placeholder": "Search packages by name or description...",
+      "results": "Found {count} packages",
+      "forQuery": "for search {query}",
+      "inCategory": "in selected category",
+      "clearFilters": "Clear all filters",
+      "noResults": "No packages match your search",
+      "tryDifferent": "Try different keywords or filters"
     }
   },
   "contact": {
