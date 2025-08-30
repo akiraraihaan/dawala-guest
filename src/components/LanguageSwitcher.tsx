@@ -45,7 +45,7 @@ export default function LanguageSwitcher() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-1 px-2 py-1 bg-white/90 backdrop-blur-sm rounded-full border border-white/30 text-gray-800 hover:bg-white transition-all duration-200 shadow-lg"
+        className="flex items-center space-x-1 px-2 py-1 bg-white/90 backdrop-blur-sm rounded-full border border-white/30 text-gray-800 hover:bg-white transition-all duration-200 shadow-lg cursor-pointer"
       >
         <div className="w-5 h-5 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
           <img
@@ -71,7 +71,7 @@ export default function LanguageSwitcher() {
         <div className="absolute right-0 mt-2 w-24 bg-white rounded-lg shadow-xl border border-gray-200 py-1 z-50">
           <button
             onClick={() => switchLanguage('id')}
-            className={`w-full flex items-center space-x-2 px-3 py-2 text-sm hover:bg-green-50 transition-colors ${
+            className={`cursor-pointer w-full flex items-center space-x-2 px-3 py-2 text-sm hover:bg-green-50 transition-colors ${
               currentLocale === 'id' ? 'bg-green-50 text-green-600' : 'text-gray-700'
             }`}
           >
@@ -86,7 +86,7 @@ export default function LanguageSwitcher() {
           </button>
           <button
             onClick={() => switchLanguage('en')}
-            className={`w-full flex items-center space-x-2 px-3 py-2 text-sm hover:bg-green-50 transition-colors ${
+            className={`cursor-pointer w-full flex items-center space-x-2 px-3 py-2 text-sm hover:bg-green-50 transition-colors ${
               currentLocale === 'en' ? 'bg-green-50 text-green-600' : 'text-gray-700'
             }`}
           >
