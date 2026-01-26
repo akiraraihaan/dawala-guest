@@ -1,8 +1,8 @@
-# Dokumentasi Teknis Website Desa Wisata Dawala
+# Dokumentasi (Teknis) Website Desa Wisata Dawala
 
-## Latar Belakang Proyek
+## Sekilas Info
 
-Website ini dikembangkan sebagai bagian dari kegiatan MBKM yang berjudul "Peningkatan Kapasitas Masyarakat melalui Transformasi Digital dalam Perintisan Wisata Halal Berbasis Rantai Pasok Hijau di Desa Alamendah".
+Website ini dikembangkan sebagai bagian dari kegiatan pengmas yang berjudul "Peningkatan Kapasitas Masyarakat melalui Transformasi Digital dalam Perintisan Wisata Halal Berbasis Rantai Pasok Hijau di Desa Alamendah".
 
 ## Arsitektur Sistem
 
