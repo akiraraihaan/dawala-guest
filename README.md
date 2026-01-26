@@ -1,12 +1,12 @@
-# Dokumentasi (Teknis) Website Desa Wisata Dawala
+# Dokumentasi (Teknis) Web Desa Wisata Dawala
 
 ## Sekilas Info
 
-Website ini dikembangkan sebagai bagian dari kegiatan pengmas yang berjudul "Peningkatan Kapasitas Masyarakat melalui Transformasi Digital dalam Perintisan Wisata Halal Berbasis Rantai Pasok Hijau di Desa Alamendah".
+Web ini dikembangkan sebagai bagian dari kegiatan pengmas yang berjudul "Peningkatan Kapasitas Masyarakat melalui Transformasi Digital dalam Perintisan Wisata Halal Berbasis Rantai Pasok Hijau di Desa Alamendah".
 
 ## Arsitektur Sistem
 
-Website ini dibangun menggunakan arsitektur modern berbasis Next.js 15.4.5 dengan pendekatan full-stack. Sistem menggunakan React 19.1.0 sebagai library frontend dan PostgreSQL sebagai database utama. Konfigurasi teknologi dipilih untuk memberikan performa optimal, skalabilitas yang baik, dan kemudahan maintenance.
+Web ini dibangun menggunakan arsitektur modern berbasis Next.js 15.4.5 dengan pendekatan full-stack. Sistem menggunakan React 19.1.0 sebagai library frontend dan PostgreSQL sebagai database utama. Konfigurasi teknologi dipilih untuk memberikan performa optimal, skalabilitas yang baik, dan kemudahan maintenance.
 
 Stack teknologi yang digunakan meliputi Next.js sebagai framework utama dengan fitur App Router, TypeScript untuk type safety, Tailwind CSS untuk styling, Prisma sebagai ORM database, PostgreSQL sebagai database relational, dan integrasi dengan Supabase untuk layanan backend tambahan. Arsitektur ini memungkinkan pengembangan yang cepat dengan code organization yang terstruktur.
 
